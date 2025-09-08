@@ -138,13 +138,13 @@ nav .container {
 .btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; text-align: center; }
 .btn-primary { background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end)); color: white; }
 .btn-secondary {
-    background: rgba(255, 255, 255, 1);
+    background: rgba(102, 126, 234, 0.8);
     backdrop-filter: blur(5px);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); }
-.btn-secondary:hover { background: rgba(255, 255, 255, 1); }
+.btn-secondary:hover { background: rgba(102, 126, 234, 1); }
 
 .hero-image {
     position: relative;
