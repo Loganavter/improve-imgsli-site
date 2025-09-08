@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Releases - Improve-ImgSLI</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    <noscript>
+      <style>
+        body {
+          opacity: 1 !important;
+        }
+      </style>
+    </noscript>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="https://raw.githubusercontent.com/Loganavter/media_archive/main/Improve_ImgSLI/icons/logo.svg" alt="Improve-ImgSLI Logo">
+                    <span>Improve-ImgSLI</span>
+                </a>
+
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="index.html" data-i18n="nav_home">Home</a></li>
+                        <li><a href="releases.html" data-i18n="nav_releases">Releases</a></li>
+                        <li><a href="development-story.html" data-i18n="nav_dev_story">Dev Story</a></li>
+                        <li><a href="roadmap.html" data-i18n="nav_roadmap">Roadmap</a></li>
+                        <li><a href="https://github.com/Loganavter/Improve-ImgSLI" target="_blank" rel="noopener noreferrer" data-i18n="nav_github">GitHub</a></li>
+
+                        <li>
+                            <div class="lang-switcher">
+                                <button class="lang-switcher-current">
+                                    <span data-i18n="lang_switcher_title">Language</span>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                                </button>
+                                <ul class="lang-switcher-dropdown">
+                                    <li><a href="#" data-lang="en">English</a></li>
+                                    <li><a href="#" data-lang="ru">Русский</a></li>
+                                    <li><a href="#" data-lang="zh">中文</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="overlay"></div>
+
+    <main>
+
+        <section id="releases">
+            <div class="container">
+                <h2 class="section-title" data-i18n="releases_title">Release History</h2>
+                <p class="section-subtitle"><span data-i18n="releases_subtitle_part1">A detailed log of all major versions. For a full list of releases, visit the</span> <a href="https://github.com/Loganavter/Improve-ImgSLI/releases" target="_blank" rel="noopener noreferrer" data-i18n="releases_github_link">GitHub Releases page</a><span data-i18n="releases_subtitle_part2">.</span></p>
+                <div class="releases-container">
+
+                    <div class="release-card">
+                        <div class="release-header"><h3 class="release-version">v6.2.0 <span class="latest-tag" data-i18n="release_latest">Latest</span></h3><span class="release-date">August 16, 2025</span></div>
+                        <div class="release-body"><p><strong data-i18n="release_v620_title">The MVP Revolution - A Monumental Refactor!</strong> <span data-i18n="release_v620_desc">This is the most extensive architectural refactoring in the project's history, transitioning the entire application to a robust and modern Model-View-Presenter (MVP) pattern and introducing a completely custom-built UI.</span></p><h3 data-i18n="release_highlights">Highlights</h3><ul><li><strong data-i18n="release_v620_robust_arch">Robust MVP Architecture:</strong> <span data-i18n="release_v620_robust_arch_desc">Re-engineered into a Model-View-Presenter pattern for vastly improved stability and maintainability.</span></li><li><strong data-i18n="release_v620_custom_ui">Custom Fluent UI:</strong> <span data-i18n="release_v620_custom_ui_desc">The dependency on PyQt-Fluent-Widgets has been removed in favor of custom, lightweight "fluent-style" components.</span></li><li><strong data-i18n="release_v620_caching">Three-Level Caching System:</strong> <span data-i18n="release_v620_caching_desc">Enhanced caching architecture for improved performance.</span></li><li><strong data-i18n="release_v620_core_features">Reimagined Core Features:</strong> <span data-i18n="release_v620_core_features_desc">New dedicated Export Dialog, a structured Help Window, and a powerful two-panel Image List manager with Drag & Drop.</span></li></ul></div>
+                        <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v6.2.0/Improve_ImgSLI_Setup_v6.2.0.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/v6.2.0.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                    </div>
+
+                    <div class="release-card">
+                        <div class="release-header"><h3 class="release-version">v5.8.20</h3><span class="release-date">July 9, 2025</span></div>
+                        <div class="release-body"><p><strong data-i18n="release_v5820_title">The Definitive Experience Update!</strong> <span data-i18n="release_v5820_desc">A major quality-of-life and rendering engine update focusing on control, quality, and stability.</span></p><h3 data-i18n="release_highlights">Highlights</h3><ul><li><strong data-i18n="release_v5820_reactive">Reactive State-Driven Architecture:</strong> <span data-i18n="release_v5820_reactive_desc">Re-engineered core logic to eliminate race conditions and improve stability.</span></li><li><strong data-i18n="release_v5820_launcher">Power-User Launcher:</strong> <span data-i18n="release_v5820_launcher_desc">The launcher.sh script is now a full-fledged command-line utility.</span></li><li><strong data-i18n="release_v5820_magnifier">Unleashed Magnifier:</strong> <span data-i18n="release_v5820_magnifier_desc">The magnifier now renders on a dynamic canvas, can be positioned outside image boundaries, and correctly supports horizontal split view.</span></li><li><strong data-i18n="release_v5820_ui">Streamlined UI Interaction:</strong> <span data-i18n="release_v5820_ui_desc">Added long-press actions and scrollable image selection lists to speed up workflow.</span></li></ul></div>
+                        <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v5.8.20/Improve_ImgSLI_Setup_v5.8.20.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/v5.8.20.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                    </div>
+
+                     <div class="release-card">
+                        <div class="release-header"><h3 class="release-version">v4.8.9</h3><span class="release-date">June 5, 2025</span></div>
+                        <div class="release-body"><p><strong data-i18n="release_v489_title">The Phoenix Rises, Powered by AI!</strong> <span data-i18n="release_v489_desc">A massive update featuring significant architectural changes, performance enhancements, and a fresh look using qfluentwidgets.</span></p><h3 data-i18n="release_highlights">Highlights</h3><ul><li><strong data-i18n="release_v489_performance">Revolutionary Performance:</strong> <span data-i18n="release_v489_performance_desc">A new multi-layered architecture and advanced caching service make the application 2-3 times smoother.</span></li><li><strong data-i18n="release_v489_ui">Modern UI with Fluent Widgets:</strong> <span data-i18n="release_v489_ui_desc">A complete visual overhaul for a sleek, modern aesthetic.</span></li><li><strong data-i18n="release_v489_ai">AI-Driven Development:</strong> <span data-i18n="release_v489_ai_desc">Major portions of this update were made possible through rapid prototyping with AI agents.</span></li><li><strong data-i18n="release_v489_magnifier">Enhanced Magnifier Tool:</strong> <span data-i18n="release_v489_magnifier_desc">More controls, smoother operation, and better visual feedback.</span></li></ul></div>
+                        <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v4.9.0/Improve_ImgSLI_Setup_v4.9.0.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/v4.8.9.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                    </div>
+
+                    <div class="release-card">
+                       <div class="release-header"><h3 class="release-version">v3.1.2</h3><span class="release-date">April 15, 2025</span></div>
+                       <div class="release-body"><p><strong data-i18n="release_v312_title">Stable Windows Release.</strong> <span data-i18n="release_v312_desc">A significant update that provided the first stable, modern Windows installer. This release also included bug fixes, design improvements, a full-fledged settings panel, and added a setting for JPEG quality.</span></p></div>
+                       <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v3.1.2/Improve_ImgSLI.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/v3.1.2.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                   </div>
+
+                   <div class="release-card">
+                      <div class="release-header"><h3 class="release-version">v2.3.1</h3><span class="release-date">March 31, 2025</span></div>
+                      <div class="release-body"><p><strong data-i18n="release_v231_title">Cross-Platform Milestone.</strong> <span data-i18n="release_v231_desc">Introduced the first official Windows version alongside updates for the Flatpak build, marking a major step towards cross-platform availability for the application.</span></p></div>
+                      <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v2.3.1/Improve_ImgSLI.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/v2.3.1.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                  </div>
+
+                  <div class="release-card">
+                     <div class="release-header"><h3 class="release-version">v1.0.0</h3><span class="release-date">October 23, 2024</span></div>
+                     <div class="release-body"><p><strong data-i18n="release_v100_title">The First Public Release.</strong> <span data-i18n="release_v100_desc">The initial version of Improve-ImgSLI was released, providing the core feature set including side-by-side comparison, a draggable splitter, and the first iteration of the magnifier tool.</span></p></div>
+                     <div class="release-assets"><h4 data-i18n="release_downloads">Downloads</h4><div class="asset-buttons"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/V1.0/Improve_ImgSLI.exe" class="asset-btn" data-i18n="release_windows_installer">Windows Installer (.exe)</a><a href="https://github.com/Loganavter/Improve-ImgSLI/archive/refs/tags/V1.0.zip" class="asset-btn" data-i18n="release_source_code">Source Code (.zip)</a></div></div>
+                 </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h4 data-i18n="footer_project">Project</h4><p><a href="https://github.com/Loganavter/Improve-ImgSLI" data-i18n="footer_github_repo">GitHub Repository</a></p><p><a href="releases.html" data-i18n="nav_releases">Releases</a></p><p><a href="https://github.com/Loganavter/Improve-ImgSLI/issues" data-i18n="footer_report_issues">Report Issues</a></p></div>
+                <div class="footer-section"><h4 data-i18n="footer_community">Community</h4><p><a href="https://flathub.org/apps/details/io.github.Loganavter.Improve-ImgSLI">Flathub</a></p><p><a href="https://aur.archlinux.org/packages/improve-imgsli">AUR Package</a></p></div>
+                <div class="footer-section"><h4 data-i18n="footer_support">Support</h4><p><a href="https://github.com/Loganavter/Improve-ImgSLI/pulls" data-i18n="footer_contribute">Contribute</a></p><p><a href="#features" data-i18n="footer_documentation">Documentation</a></p></div>
+                <div class="footer-section"><h4 data-i18n="footer_contact">Contact</h4><p><a href="https://github.com/Loganavter" target="_blank" rel="noopener noreferrer" data-i18n="footer_github_profile">GitHub Profile</a></p><p><a href="mailto:dealmail_loganavter@proton.me">dealmail_loganavter@proton.me</a></p></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Improve-ImgSLI. <span data-i18n="footer_copyright">Released under MIT License.</span></p></div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/i18n.js"></script>
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>
