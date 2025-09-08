@@ -681,3 +681,7 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     margin-bottom: 3rem;
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+

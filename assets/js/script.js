@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navToggle.classList.remove('active');
         navLinks.classList.remove('active');
         overlay.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.classList.remove('menu-open');
         if (langSwitcher) langSwitcher.classList.remove('active');
     };
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navToggle.classList.add('active');
         navLinks.classList.add('active');
         overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('menu-open');
     };
 
     if (navToggle && navLinks && overlay) {
