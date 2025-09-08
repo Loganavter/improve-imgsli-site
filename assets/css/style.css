@@ -1,4 +1,4 @@
-п:root {
+:root {
     --primary-color-start: #667eea;
     --primary-color-end: #764ba2;
     --background-dark: #0a0a0a;
@@ -135,7 +135,21 @@ nav .container {
 .hero-text h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end), #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 1s ease; }
 .hero-text p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
 .hero-buttons { display: flex; gap: 1rem; animation: fadeInUp 1s ease 0.4s both; }
-.btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; text-align: center; }
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;         /* ИЗМЕНЕНО */
+    align-items: center;         /* ДОБАВЛЕНО */
+    justify-content: center;     /* ДОБАВЛЕНО */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
 .btn-primary { background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end)); color: white; }
 .btn-secondary {
     background: rgba(102, 126, 234, 0.8);
