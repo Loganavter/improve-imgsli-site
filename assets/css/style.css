@@ -80,6 +80,7 @@ nav .container {
     font-weight: 700;
     color: #fff;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .logo img {
@@ -141,9 +142,9 @@ nav .container {
     border-radius: 50px;
     font-weight: 600;
     text-decoration: none;
-    display: inline-flex;         /* ИЗМЕНЕНО */
-    align-items: center;         /* ДОБАВЛЕНО */
-    justify-content: center;     /* ДОБАВЛЕНО */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
@@ -357,6 +358,20 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     .section-title { font-size: 2.5rem; }
     .release-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .install-note { flex-direction: column; text-align: center; }
+
+    .content-section {
+        padding: 1.5rem;
+    }
+    .release-card {
+        padding: 1.5rem;
+    }
+    .install-option {
+        padding: 1.5rem;
+    }
+
+    .hide-on-mobile {
+        display: none !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -697,5 +712,77 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
 
 body.menu-open {
     overflow: hidden;
+}
+
+@media (hover: hover) {
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--primary-color-start);
+  }
+  .nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+  }
+  .btn-secondary:hover {
+    background: rgba(102, 126, 234, 1);
+  }
+  .asset-btn:hover {
+    background: var(--primary-color-start);
+    transform: translateY(-2px);
+  }
+
+  .hero-image:hover img {
+    transform: scale(1.05);
+  }
+  .screenshot-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  }
+  .feature-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+  }
+  .feature-card:hover::before {
+    transform: scaleX(1);
+  }
+  .install-option:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .footer-section a:hover {
+    color: var(--primary-color-start);
+  }
+
+  .copy-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+  }
+  .lightbox-close:hover {
+    color: #bbb;
+  }
+  .lightbox-nav:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .lang-switcher-current:hover {
+    background: var(--background-card);
+  }
+  .lang-switcher:hover .lang-switcher-current svg {
+    transform: rotate(180deg);
+  }
+  .lang-switcher:hover .lang-switcher-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .lang-switcher-dropdown li a:hover {
+    background-color: var(--primary-color-start);
+    color: white;
+  }
 }
 
