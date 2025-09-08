@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchTranslations() {
         try {
-            const response = await fetch('/assets/js/translations.json');
+            const response = await fetch('/improve-imgsli-site/assets/js/translations.json');
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             translations = await response.json();
         } catch (error) {
