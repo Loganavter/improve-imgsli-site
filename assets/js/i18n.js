@@ -5,6 +5,9 @@ setTimeout(() => {
     }
 }, 1000);
 
+// Добавьте эту строку
+const REPO_NAME = 'improve-imgsli-site'; 
+
 document.addEventListener('DOMContentLoaded', () => {
     const SUPPORTED_LANGUAGES = ['en', 'ru', 'zh'];
     const DEFAULT_LANGUAGE = 'en';
@@ -56,41 +59,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Новая, исправленная логика для обновления ссылок
         document.querySelectorAll('a').forEach(a => {
             try {
-                const url = new URL(a.href);
+                const url = new URL(a.href, window.location.href);
+                // Обновляем только внутренние ссылки на .html страницы
                 if (url.hostname === window.location.hostname && url.pathname.endsWith('.html')) {
-                    const pathParts = url.pathname.split('/');
-                    const page = pathParts.pop();
-
-                    if (!SUPPORTED_LANGUAGES.includes(pathParts[1])) {
-                         a.pathname = `/${lang}/${page}`;
-                    }
+                    const pageName = url.pathname.split('/').pop();
+                    a.pathname = `/${REPO_NAME}/${lang}/${pageName}`;
                 }
-            } catch (e) {  }
+            } catch (e) { /* Игнорируем невалидные URL вроде mailto: */ }
         });
     }
 
+    // ЗАМЕНИТЕ СТАРУЮ ФУНКЦИЮ setLanguage НА ЭТУ
     function setLanguage(lang) {
         if (!SUPPORTED_LANGUAGES.includes(lang)) return;
 
         localStorage.setItem('language', lang);
 
-        const currentPath = window.location.pathname;
-        const currentLang = getLanguageFromURL();
-        const page = currentPath.split('/').pop() || 'index.html';
+        const page = window.location.pathname.split('/').pop() || 'index.html';
+        
+        // Новая логика построения пути
+        const newPath = `/${REPO_NAME}/${lang}/${page}`;
 
-        let newPath;
-        if (currentLang && currentLang !== lang) {
-
-            newPath = currentPath.replace(`/${currentLang}/`, `/${lang}/`);
-        } else if (!currentLang) {
-
-            newPath = `/${lang}/${page}`;
-        }
-
-        if (newPath && newPath !== currentPath) {
-            window.location.pathname = newPath;
+        if (newPath !== window.location.pathname) {
+            window.location.href = window.location.origin + newPath;
         }
     }
 
