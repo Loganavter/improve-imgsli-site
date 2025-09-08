@@ -74,7 +74,7 @@ This website was built with fundamental web technologies, without any external f
 
 A live version of the website is hosted on GitHub Pages.
 
-**[➡️ Click here to view the Live Demo](https://loganavter.github.io/Improve-ImgSLI-Website/)**
+**[➡️ Click here to view the Live Demo](https://loganavter.github.io/improve-imgsli-site/)**
 
 ---
 
