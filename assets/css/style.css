@@ -135,7 +135,7 @@ nav .container {
 .hero-text h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end), #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 1s ease; }
 .hero-text p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
 .hero-buttons { display: flex; gap: 1rem; animation: fadeInUp 1s ease 0.4s both; }
-.btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
+.btn { padding: 1rem 2rem; border: none; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; text-align: center; }
 .btn-primary { background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end)); color: white; }
 .btn-secondary {
     background: rgba(102, 126, 234, 0.8);
@@ -239,7 +239,7 @@ section { padding: 2rem 0; }
 .release-assets { margin-top: 2rem; }
 .release-assets h4 { margin-bottom: 1rem; }
 .asset-buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
-.asset-btn { background: rgba(255, 255, 255, 0.1); color: white; padding: 0.75rem 1.5rem; border-radius: 10px; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+.asset-btn { background: rgba(255, 255, 255, 0.1); color: white; padding: 0.75rem 1.5rem; border-radius: 10px; text-decoration: none; transition: all 0.3s ease; }
 .asset-btn:hover { background: var(--primary-color-start); transform: translateY(-2px); }
 
 .content-section { background: var(--background-card); border: 1px solid var(--border-color); border-radius: 20px; padding: 3rem; max-width: 900px; margin: 0 auto; }
