@@ -1,5 +1,3 @@
-
-
 setTimeout(() => {
     if (!document.body.classList.contains('i18n-loaded')) {
         document.body.classList.add('i18n-loaded');
@@ -9,37 +7,40 @@ setTimeout(() => {
 document.addEventListener('DOMContentLoaded', () => {
 
     const SUPPORTED_LANGUAGES = ['en', 'ru', 'zh'];
-    const DEFAULT_LANGUAGE = 'en';
-
     let translations = {};
 
     async function fetchTranslations() {
         try {
 
-            const response = await fetch(`../assets/js/translations.json`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const potentialPaths = [
+                '../assets/js/translations.json',
+                '../../assets/js/translations.json'
+            ];
+
+            let response;
+            for (const path of potentialPaths) {
+                try {
+                    response = await fetch(path);
+                    if (response.ok) break;
+                } catch (e) {  }
+            }
+
+            if (!response || !response.ok) {
+                throw new Error(`Could not load translations.json from any known path.`);
+            }
+
             translations = await response.json();
         } catch (error) {
             console.error("Could not load translations:", error);
-            throw error;
+            document.body.classList.add('i18n-loaded');
         }
     }
 
     function getLanguageFromURL() {
+        const pathParts = window.location.pathname.split('/').filter(p => p !== '');
 
-        const pathParts = window.location.pathname.split('/');
-
-        const lang = pathParts.length > 2 ? pathParts[pathParts.length - 2] : null;
-        return SUPPORTED_LANGUAGES.includes(lang) ? lang : null;
-    }
-
-    function getLanguageFromStorage() {
-        return localStorage.getItem('language');
-    }
-
-    function getLanguageFromBrowser() {
-        const lang = navigator.language.split('-')[0];
-        return SUPPORTED_LANGUAGES.includes(lang) ? lang : null;
+        const lang = pathParts.find(part => SUPPORTED_LANGUAGES.includes(part));
+        return lang || null;
     }
 
     function translatePage(lang) {
@@ -67,11 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const url = new URL(a.href, window.location.href);
                 if (url.hostname === window.location.hostname && url.pathname.endsWith('.html')) {
                     const pageName = url.pathname.split('/').pop();
+                    const currentLangInPath = SUPPORTED_LANGUAGES.find(l => url.pathname.includes(`/${l}/`));
 
-                    const newPath = `/${lang}/${pageName}`;
-
-                    const basePath = window.location.pathname.substring(0, window.location.pathname.indexOf('/', 1));
-                    a.href = `${basePath}${newPath}`;
+                    if (currentLangInPath && currentLangInPath !== lang) {
+                         a.href = a.href.replace(`/${currentLangInPath}/`, `/${lang}/`);
+                    }
                 }
             } catch (e) {  }
         });
@@ -82,9 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         localStorage.setItem('language', lang);
 
-        const currentPageName = window.location.pathname.split('/').pop() || 'index.html';
+        const currentLang = getLanguageFromURL();
+        if (currentLang) {
 
-        window.location.href = `../${lang}/${currentPageName}`;
+            const newPath = window.location.pathname.replace(`/${currentLang}/`, `/${lang}/`);
+            window.location.href = newPath;
+        } else {
+
+            window.location.href = `../${lang}/`;
+        }
     }
 
     function initLangSwitcher(currentLang) {
@@ -113,26 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
     async function initialize() {
         const urlLang = getLanguageFromURL();
 
-        if (urlLang) {
+        const currentLang = urlLang || 'en';
 
-            try {
-                await fetchTranslations();
-            } catch (error) {
-                document.body.classList.add('i18n-loaded');
-                return;
-            }
-            document.documentElement.lang = urlLang;
-            translatePage(urlLang);
-            initLangSwitcher(urlLang);
-        } else {
-
-            const storedLang = getLanguageFromStorage();
-            const browserLang = getLanguageFromBrowser();
-            const langToRedirect = storedLang || browserLang || DEFAULT_LANGUAGE;
-
-            window.location.href = `./${langToRedirect}/index.html`;
+        try {
+            await fetchTranslations();
+        } catch (error) {
+            document.body.classList.add('i18n-loaded');
             return;
         }
+
+        document.documentElement.lang = currentLang;
+        translatePage(currentLang);
+        initLangSwitcher(currentLang);
 
         document.body.classList.add('i18n-loaded');
     }

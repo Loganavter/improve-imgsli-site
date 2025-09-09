@@ -61,15 +61,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const currentPage = window.location.pathname.split('/').pop();
-    const activeLinks = document.querySelectorAll('.nav-links a');
+    const activeLinks = document.querySelectorAll('.nav-links > li > a');
+    const currentPath = window.location.pathname;
 
     activeLinks.forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        if ((currentPage === '' || currentPage === 'index.html') && (linkPage === '' || linkPage === 'index.html')) {
+
+        const linkPath = new URL(link.href).pathname;
+
+        if (currentPath === linkPath || (currentPath.endsWith('/') && currentPath.slice(0, -1) === linkPath)) {
             link.classList.add('active');
-        } else if (linkPage !== "" && currentPage.includes(linkPage)) {
-            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
     });
 

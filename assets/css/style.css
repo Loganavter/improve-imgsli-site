@@ -284,6 +284,7 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
         height: 25px;
         cursor: pointer;
         z-index: 1001;
+        flex-shrink: 0;
     }
     .nav-toggle span {
         width: 100%;
@@ -619,16 +620,8 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     transition: background-color 0.2s ease;
 }
 
-.lang-switcher-current:hover {
-    background: var(--background-card);
-}
-
 .lang-switcher-current svg {
     transition: transform 0.2s ease;
-}
-
-.lang-switcher:hover .lang-switcher-current svg {
-    transform: rotate(180deg);
 }
 
 .lang-switcher-dropdown {
@@ -771,12 +764,7 @@ body.menu-open {
   .lightbox-nav:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  .lang-switcher-current:hover {
-    background: var(--background-card);
-  }
-  .lang-switcher:hover .lang-switcher-current svg {
-    transform: rotate(180deg);
-  }
+
   .lang-switcher:hover .lang-switcher-dropdown {
     opacity: 1;
     visibility: visible;
