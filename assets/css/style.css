@@ -101,7 +101,12 @@ nav .container {
     gap: 2rem;
 }
 
-.nav-links a {
+.nav-links > li {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links > li > a {
     color: #ffffff;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -110,11 +115,11 @@ nav .container {
     font-size: 1.1rem;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links > li > a:hover, .nav-links > li > a.active {
     color: var(--primary-color-start);
 }
 
-.nav-links a::after {
+.nav-links > li > a::after {
     content: '';
     position: absolute;
     width: 0;
@@ -125,8 +130,36 @@ nav .container {
     transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after, .nav-links a.active::after {
+.nav-links > li > a:hover::after, .nav-links > li > a.active::after {
     width: 100%;
+}
+
+.lang-switcher-current {
+    transition: color 0.3s ease;
+}
+
+.lang-switcher::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end));
+    transition: width 0.3s ease;
+
+    pointer-events: none;
+}
+
+.lang-switcher:hover {
+
+    & .lang-switcher-current {
+        color: var(--primary-color-start);
+    }
+
+    &::after {
+        width: 100%;
+    }
 }
 
 .nav-toggle { display: none; }
@@ -643,7 +676,6 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     pointer-events: none;
 }
 
-.lang-switcher:hover .lang-switcher-dropdown,
 .lang-switcher.active .lang-switcher-dropdown {
     opacity: 1;
     visibility: visible;
@@ -662,8 +694,8 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
 }
 
 .lang-switcher-dropdown li a:hover {
-    background-color: var(--primary-color-start);
-    color: white;
+    color: var(--primary-color-start);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 992px) {
@@ -677,9 +709,13 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
         width: 100%;
     }
     .lang-switcher-current {
-        justify-content: space-between;
+
+        background: transparent;
+        justify-content: flex-start;
         width: 100%;
-        background: var(--background-card);
+        font-size: 1.1rem;
+        padding: 5px 0;
+        color: #ffffff;
     }
     .lang-switcher-dropdown {
         position: static;
@@ -699,6 +735,15 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
      .lang-switcher.active .lang-switcher-current svg {
         transform: rotate(180deg);
     }
+
+    .lang-switcher:hover .lang-switcher-current {
+        color: var(--primary-color-start);
+    }
+
+    .lang-switcher::after {
+        display: none;
+    }
+
 }
 
 #releases .section-subtitle {
@@ -712,10 +757,10 @@ body.menu-open {
 
 @media (hover: hover) {
 
-  .nav-links a:hover, .nav-links a.active {
+  .nav-links > li > a:hover, .nav-links > li > a.active {
     color: var(--primary-color-start);
   }
-  .nav-links a:hover::after, .nav-links a.active::after {
+  .nav-links > li > a:hover::after, .nav-links > li > a.active::after {
     width: 100%;
   }
 
@@ -765,15 +810,40 @@ body.menu-open {
     background-color: rgba(0, 0, 0, 0.5);
   }
 
-  .lang-switcher:hover .lang-switcher-dropdown {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .lang-switcher-dropdown li a:hover {
-    background-color: var(--primary-color-start);
-    color: white;
-  }
+}
+
+@media (max-width: 992px) {
+
+    .lang-switcher::after {
+        display: none;
+    }
+
+    .lang-switcher-current {
+        background: transparent !important;
+        justify-content: flex-start;
+        padding: 5px 0;
+        color: #ffffff;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .lang-switcher-current::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end));
+        transition: width 0.3s ease;
+    }
+
+    .lang-switcher:hover .lang-switcher-current {
+        color: var(--primary-color-start);
+    }
+    .lang-switcher:hover .lang-switcher-current::after {
+        width: 100%;
+    }
+
 }
 

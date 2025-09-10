@@ -37,15 +37,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (langSwitcher) {
-        const langSwitcherButton = langSwitcher.querySelector('.lang-switcher-current');
-        if (langSwitcherButton) {
-            langSwitcherButton.addEventListener('click', (e) => {
+    const langSwitcherButton = document.querySelector('.lang-switcher-current');
+    const langSwitcherContainer = document.querySelector('.lang-switcher');
 
-                e.stopPropagation();
-                langSwitcher.classList.toggle('active');
-            });
-        }
+    if (langSwitcherButton && langSwitcherContainer) {
+
+        langSwitcherButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isMenuOpenInMobile = navLinks.classList.contains('active');
+
+            if (isMenuOpenInMobile) {
+                 langSwitcherContainer.classList.toggle('active');
+            } else {
+                 langSwitcherContainer.classList.toggle('active');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langSwitcherContainer.contains(e.target)) {
+                langSwitcherContainer.classList.remove('active');
+            }
+        });
     }
 
     const header = document.querySelector('header');
