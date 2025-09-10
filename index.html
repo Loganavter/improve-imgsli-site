@@ -7,24 +7,16 @@
     <meta http-equiv="refresh" content="0; url=./en/">
 
     <script>
-        // (Шаг 2) "Умное" перенаправление с помощью JavaScript
         (function() {
-            // Список поддерживаемых языков (из ваших папок)
             const supportedLangs = ['en', 'ru', 'zh'];
 
-            // Язык по умолчанию, если ничего не подойдет
             const defaultLang = 'en';
 
-            // Получаем язык браузера пользователя (например, "ru-RU", "en-US", "zh-CN")
-            // и берем только первые две буквы ("ru", "en", "zh")
             const userLang = navigator.language.substring(0, 2);
 
-            // Проверяем, есть ли язык браузера в списке поддерживаемых
             if (supportedLangs.includes(userLang)) {
-                // Если да, перенаправляем на нужную языковую версию
                 window.location.replace('./' + userLang + '/');
             } else {
-                // Если нет, перенаправляем на версию по умолчанию
                 window.location.replace('./' + defaultLang + '/');
             }
         })();
