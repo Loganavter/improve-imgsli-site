@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Loganavter/media_archive/main/Improve_ImgSLI/icons/logo.svg" alt="Logo" width="128">
+  <img src="./assets/images/logo.svg" alt="Logo" width="128">
 </p>
 
 <h1 align="center">Improve-ImgSLI Website</h1>
@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  <a href="https://loganavter.github.io/Improve-ImgSLI-Website/">
-    <img src="https://img.shields.io/website?label=live%20demo&style=for-the-badge&url=https%3A%2F%2Floganavter.github.io%2FImprove-ImgSLI-Website%2F" alt="Live Demo">
+  <a href="https://loganavter.github.io/improve-imgsli-site/">
+    <img src="https://img.shields.io/website?label=live%20demo&style=for-the-badge&url=https%3A%2F%2Floganavter.github.io%2Fimprove-imgsli-site%2F" alt="Live Demo">
   </a>
   <a href="LICENSE">
     <img src="https://img.shields.io/github/license/Loganavter/Improve-ImgSLI?style=for-the-badge" alt="License">
   </a>
-  <a href="https://github.com/Loganavter/Improve-ImgSLI-Website/issues">
-    <img src="https://img.shields.io/github/issues/Loganavter/Improve-ImgSLI-Website?style=for-the-badge" alt="Issues">
+  <a href="https://github.com/Loganavter/improve-imgsli-site/issues">
+    <img src="https://img.shields.io/github/issues/Loganavter/improve-imgsli-site?style=for-the-badge" alt="Issues">
   </a>
 </p>
 
@@ -25,7 +25,7 @@
 ## 📸 Screenshot
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Loganavter/media_archive/main/Improve_ImgSLI/site/main_site.png" alt="Website Screenshot" width="90%">
+  <img src="./assets/images/main_site.png" alt="Website Screenshot" width="90%">
 </div>
 
 ---
