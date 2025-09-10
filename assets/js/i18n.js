@@ -129,6 +129,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        window.siteTranslations = translations;
+        window.currentLang = currentLang;
+
         document.documentElement.lang = currentLang;
         translatePage(currentLang);
         initLangSwitcher(currentLang);

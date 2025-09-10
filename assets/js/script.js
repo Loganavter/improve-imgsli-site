@@ -44,13 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         langSwitcherButton.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isMenuOpenInMobile = navLinks.classList.contains('active');
 
-            if (isMenuOpenInMobile) {
-                 langSwitcherContainer.classList.toggle('active');
-            } else {
-                 langSwitcherContainer.classList.toggle('active');
-            }
+            langSwitcherContainer.classList.add('active');
         });
 
         document.addEventListener('click', (e) => {
@@ -179,8 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.querySelector('.lightbox-close');
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
+    const lightboxCaption = document.getElementById('lightbox-caption');
 
-    const screenshotSources = Array.from(screenshotCards).map(card => card.querySelector('img').src);
+    const screenshotsData = Array.from(screenshotCards).map(card => {
+        const img = card.querySelector('img');
+        const figcaption = card.querySelector('figcaption');
+        return {
+            src: img ? img.src : '',
+            captionKey: figcaption ? figcaption.dataset.i18n : ''
+        };
+    });
     let currentIndex = 0;
 
     let isZoomed = false;
@@ -201,8 +204,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showImage(index) {
         resetZoomAndPanState();
-        currentIndex = (index + screenshotSources.length) % screenshotSources.length;
-        lightboxImg.src = screenshotSources[currentIndex];
+        currentIndex = (index + screenshotsData.length) % screenshotsData.length;
+
+        const currentScreenshot = screenshotsData[currentIndex];
+        lightboxImg.src = currentScreenshot.src;
+
+        if (lightboxCaption && currentScreenshot.captionKey) {
+
+            if (window.siteTranslations && window.currentLang) {
+
+                const translatedCaption = window.siteTranslations[window.currentLang][currentScreenshot.captionKey];
+                lightboxCaption.textContent = translatedCaption || currentScreenshot.captionKey;
+            } else {
+
+                lightboxCaption.textContent = currentScreenshot.captionKey;
+            }
+        } else if (lightboxCaption) {
+            lightboxCaption.textContent = '';
+        }
     }
 
     function showNextImage() { showImage(currentIndex + 1); }
