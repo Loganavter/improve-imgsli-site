@@ -1,3 +1,7 @@
+Конечно! Вот обновлённый `readme.md` с учётом запуска сайта и финальных доработок. Я обновил 'Development Story', чтобы отразить дополнительные 4 часа работы и конкретные улучшения, а также немного дополнил раздел 'Key Features'.
+
+---
+
 <p align="center">
   <img src="./assets/images/logo.svg" alt="Logo" width="128">
 </p>
@@ -12,7 +16,7 @@
   <a href="https://loganavter.github.io/improve-imgsli-site/">
     <img src="https://img.shields.io/website?label=live%20demo&style=for-the-badge&url=https%3A%2F%2Floganavter.github.io%2Fimprove-imgsli-site%2F" alt="Live Demo">
   </a>
-  <a href="LICENSE">
+  <a href="LICENSE.txt">
     <img src="https://img.shields.io/github/license/Loganavter/Improve-ImgSLI?style=for-the-badge" alt="License">
   </a>
   <a href="https://github.com/Loganavter/improve-imgsli-site/issues">
@@ -54,7 +58,7 @@ The website is a static, single-page application designed to be fast, responsive
 
 -   **🎨 Modern & Responsive Design**: A clean, dark-themed UI that looks great on both desktop and mobile devices.
 -   **🌍 Multi-Language Support**: Built-in internationalization (i18n) with seamless language switching between English, Russian, and Chinese.
--   **🚀 Interactive Elements**: Features like a smooth-scrolling navigation, copy-to-clipboard buttons for code blocks, and an elegant image lightbox gallery enhance the user experience.
+-   **🚀 Interactive Elements**: Features like a smooth-scrolling navigation, copy-to-clipboard buttons for code blocks, and an elegant image lightbox gallery with dynamic, multilingual captions enhance the user experience.
 -   **📄 Rich Content Sections**: Clearly organized sections for the app's features, releases, development story, and future roadmap.
 -   **⚡ Zero Dependencies**: Built with pure HTML, CSS, and Vanilla JavaScript for maximum performance and simplicity.
 
@@ -83,13 +87,16 @@ A live version of the website is hosted on GitHub Pages.
 <details>
 <summary>Show Development Story</summary>
 
-This website was brought to life in a rapid **6-hour development sprint**, showcasing the power of modern AI-assisted workflows. The process was a collaboration between human direction and multiple AI tools.
+This website was brought to life in a total of **10 hours**, split into an initial rapid development sprint and a final polishing phase, showcasing the power of modern AI-assisted workflows.
 
--   **Conceptualization & Styling (Claude):** The initial design direction, layout ideas, and overall aesthetic were sketched out with the help of Claude. Its ability to generate creative and coherent styling concepts provided the foundational look and feel for the project.
+-   **Phase 1: Initial 6-Hour Sprint**
+    -   **Conceptualization & Styling (Claude):** The initial design direction, layout ideas, and overall aesthetic were sketched out with the help of Claude. Its ability to generate creative and coherent styling concepts provided the foundational look and feel for the project.
+    -   **Intensive Development (Gemini & Cursor):** The bulk of the coding—including the HTML structure, final CSS implementation, and all JavaScript logic—was hammered out in a highly productive session using a combination of Google's Gemini and Cursor. This AI pairing was instrumental in refining the initial concepts and writing clean code for interactive features like the i18n switcher and initial lightbox.
 
--   **Intensive Development (Gemini & Cursor):** The bulk of the coding—including the HTML structure, final CSS implementation, and all JavaScript logic—was hammered out in a highly productive session using a combination of Google's Gemini and Cursor. This AI pairing was instrumental in refining the initial concepts, writing clean code for interactive features (like the i18n switcher and lightbox), and ensuring the site was both functional and polished.
+-   **Phase 2: Polishing & Deployment (4 hours)**
+    -   Following the initial build, this stage involved deploying the site to GitHub Pages, tackling hosting-specific issues, and conducting a thorough UX/UI polish. Key improvements included adding dynamic, multilingual captions to the image lightbox, ensuring a consistent layout across all pages, and consolidating project assets for streamlined maintenance and self-contained deployment.
 
--   **Future Plans:** The site will be permanently hosted and maintained via GitHub Pages, serving as the official entry point for the Improve-ImgSLI application.
+The entire process, from concept to a fully functional and deployed multi-language site in just 10 hours, serves as a testament to the efficiency of AI-augmented development.
 </details>
 
 ---
@@ -110,4 +117,4 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## 📄 License <a name="license"></a>
 
-Distributed under the MIT License. See the `LICENSE` file for more information.
+Distributed under the MIT License. See the `LICENSE.txt` file for more information.
