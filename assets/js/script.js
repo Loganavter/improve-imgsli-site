@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         langSwitcherButton.addEventListener('click', (e) => {
             e.stopPropagation();
 
-            langSwitcherContainer.classList.add('active');
+            langSwitcherContainer.classList.toggle('active');
         });
 
         document.addEventListener('click', (e) => {
