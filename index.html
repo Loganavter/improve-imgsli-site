@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Redirecting...</title>
-    <link rel="icon" href="./assets/images/logo.svg" type="image/svg+xml">
+    <link rel="icon" href="/assets/images/logo.svg" type="image/svg+xml">
 
-    <meta http-equiv="refresh" content="0; url=./en/">
+    <meta http-equiv="refresh" content="0; url=/en">
 
     <script>
         (function() {
@@ -16,9 +16,9 @@
             const userLang = navigator.language.substring(0, 2);
 
             if (supportedLangs.includes(userLang)) {
-                window.location.replace('./' + userLang + '/');
+                window.location.replace('/' + userLang);
             } else {
-                window.location.replace('./' + defaultLang + '/');
+                window.location.replace('/' + defaultLang);
             }
         })();
     </script>
@@ -27,9 +27,9 @@
     <p>Redirecting to the website...</p>
     <p>If you are not redirected automatically, please select your language:</p>
     <ul>
-        <li><a href="./en/">English</a></li>
-        <li><a href="./ru/">Русский</a></li>
-        <li><a href="./zh/">中文</a></li>
+        <li><a href="/en">English</a></li>
+        <li><a href="/ru">Русский</a></li>
+        <li><a href="/zh">中文</a></li>
     </ul>
 </body>
 </html>
