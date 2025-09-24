@@ -1,6 +1,3 @@
-Конечно! Вот обновлённый `readme.md` с учётом запуска сайта и финальных доработок. Я обновил 'Development Story', чтобы отразить дополнительные 4 часа работы и конкретные улучшения, а также немного дополнил раздел 'Key Features'.
-
----
 
 <p align="center">
   <img src="./assets/images/logo.svg" alt="Logo" width="128">
@@ -14,7 +11,7 @@
 
 <p align="center">
   <a href="https://loganavter.github.io/improve-imgsli-site/">
-    <img src="https://img.shields.io/website?label=live%20demo&style=for-the-badge&url=https%3A%2F%2Floganavter.github.io%2Fimprove-imgsli-site%2F" alt="Live Demo">
+    <img src="https://img.shields.io/website?label=live%20demo&style=for-the-badge&url=https%3A%2F%2Fimprove-imgsli.ru%2F" alt="Live Demo">
   </a>
   <a href="LICENSE.txt">
     <img src="https://img.shields.io/github/license/Loganavter/Improve-ImgSLI?style=for-the-badge" alt="License">
@@ -78,7 +75,7 @@ This website was built with fundamental web technologies, without any external f
 
 A live version of the website is hosted on GitHub Pages.
 
-**[➡️ Click here to view the Live Demo](https://loganavter.github.io/improve-imgsli-site/)**
+**[➡️ Click here to view the Live Demo](https://improve-imgsli.ru/)**
 
 ---
 
