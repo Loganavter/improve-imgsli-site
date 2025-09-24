@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://improve-imgsli.ru/sitemap.xml
+
