@@ -73,7 +73,7 @@ This website was built with fundamental web technologies, without any external f
 
 ## 🌐 Live Demo <a name="live-demo"></a>
 
-A live version of the website is hosted on GitHub Pages.
+A live version of the website is hosted on Cloudflare.
 
 **[➡️ Click here to view the Live Demo](https://improve-imgsli.ru/)**
 
