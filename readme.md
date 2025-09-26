@@ -73,7 +73,7 @@ This website was built with fundamental web technologies, without any external f
 
 ## 🌐 Live Demo <a name="live-demo"></a>
 
-A live version of the website is hosted on Cloudflare.
+A live version of the website is hosted on GitHub Pages.
 
 **[➡️ Click here to view the Live Demo](https://improve-imgsli.ru/)**
 
@@ -94,6 +94,11 @@ This website was brought to life in a total of **10 hours**, split into an initi
     -   Following the initial build, this stage involved deploying the site to GitHub Pages, tackling hosting-specific issues, and conducting a thorough UX/UI polish. Key improvements included adding dynamic, multilingual captions to the image lightbox, ensuring a consistent layout across all pages, and consolidating project assets for streamlined maintenance and self-contained deployment.
 
 The entire process, from concept to a fully functional and deployed multi-language site in just 10 hours, serves as a testament to the efficiency of AI-augmented development.
+
+-   **Phase 3: Infrastructure Stabilization & UX Refinement (Background)**
+    -   This phase focused on infrastructure permanence and detailed user experience fixes. Despite initial fatigue, I successfully secured a permanent domain name—an inexpensive but functional solution—and managed the necessary redirects to decouple the site from the initial GitHub Pages URL.
+    -   A brief attempt was made to migrate the site behind the **Cloudflare CDN** for enhanced performance and security. However, this CDN caused unforeseen conflicts with the existing hosting configuration, leading to a quick decision to revert the infrastructure back to the reliable **GitHub Pages** setup, with the new domain pointing successfully.
+    -   In parallel, significant UX cleanup took place: the **accordion/collapsible elements** were debugged and repaired for smooth operation, the site's navigation panel was critically adjusted to be sticky to the **viewport** (the top of the browser window) rather than the top of the entire page, and various other minor layout and responsiveness issues were patched up.
 </details>
 
 ---
