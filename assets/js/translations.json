@@ -120,7 +120,17 @@
     "release_v231_desc": "Introduced the first official Windows version alongside updates for the Flatpak build, marking a major step towards cross-platform availability for the application.",
     "release_v100_title": "The First Public Release.",
     "release_v100_desc": "The initial version of Improve-ImgSLI was released, providing the core feature set including side-by-side comparison, a draggable splitter, and the first iteration of the magnifier tool.",
-    "release_highlights": "Highlights"
+    "release_highlights": "Highlights",
+    "release_v790_title": "Unification & Analysis - The Collaborative Evolution!",
+    "release_v790_desc": "Complete integration with shared_toolkit library enabling code reuse, revolutionary clipboard support (Ctrl+V), comprehensive image analysis tools (diffs, metrics, edge detection, channel analysis), and enhanced UX customization.",
+    "release_v790_unified": "Unified Architecture with Shared Toolkit:",
+    "release_v790_unified_desc": "Complete integration with shared component library enabling code reuse across projects.",
+    "release_v790_clipboard": "Clipboard Integration:",
+    "release_v790_clipboard_desc": "Paste images directly from clipboard (Ctrl+V) with intuitive direction selection overlay.",
+    "release_v790_analysis": "Professional Image Analysis Suite:",
+    "release_v790_analysis_desc": "Pixel difference highlighting, structural similarity mapping, edge detection, channel analysis, and metrics calculation (PSNR/SSIM).",
+    "release_v790_subpixel": "Premium Magnifier Rendering:",
+    "release_v790_subpixel_desc": "Subpixel precision controls for smooth, accurate comparisons even with different resolutions."
   },
   "ru": {
     "nav_home": "Главная",
@@ -243,7 +253,17 @@
     "release_v231_desc": "Представлена первая официальная версия для Windows наряду с обновленной сборкой Flatpak, что стало важным шагом к кроссплатформенной доступности приложения.",
     "release_v100_title": "Первый публичный релиз.",
     "release_v100_desc": "Выпущена первая версия Improve-ImgSLI, которая включала основной набор функций: сравнение «бок о бок», перетаскиваемый разделитель и первую версию инструмента «лупа».",
-    "release_highlights": "Что нового"
+    "release_highlights": "Что нового",
+    "release_v790_title": "Унификация и анализ - эволюция сотрудничества!",
+    "release_v790_desc": "Полная интеграция с библиотекой shared_toolkit для переиспользования кода, революционная поддержка буфера обмена (Ctrl+V), комплексные инструменты анализа изображений (карты разниц, метрики, детекция краёв, анализ каналов) и улучшенная кастомизация UX.",
+    "release_v790_unified": "Унифицированная архитектура с shared_toolkit:",
+    "release_v790_unified_desc": "Полная интеграция с общей библиотекой компонентов для переиспользования кода между проектами.",
+    "release_v790_clipboard": "Интеграция буфера обмена:",
+    "release_v790_clipboard_desc": "Вставка изображений напрямую из буфера обмена (Ctrl+V) с интуитивным оверлеем выбора направления.",
+    "release_v790_analysis": "Профессиональный набор инструментов анализа:",
+    "release_v790_analysis_desc": "Подсветка различий пикселей, карты структурного сходства, детекция краёв, анализ каналов и вычисление метрик (PSNR/SSIM).",
+    "release_v790_subpixel": "Премиум рендеринг лупы:",
+    "release_v790_subpixel_desc": "Элементы управления точностью субпикселей для плавного и точного сравнения даже при разных разрешениях."
   },
   "zh": {
     "nav_home": "首页",
@@ -366,6 +386,16 @@
     "release_v231_desc": "引入了第一个官方 Windows 版本以及 Flatpak 构建的更新，标志着应用程序跨平台可用性的重要一步。",
     "release_v100_title": "第一个公开版本。",
     "release_v100_desc": "发布了 Improve-ImgSLI 的初始版本，提供了核心功能集，包括并排比较、可拖拽的分割器和放大镜工具的第一次迭代。",
-    "release_highlights": "亮点"
+    "release_highlights": "亮点",
+    "release_v790_title": "统一与分析 - 协作的进化！",
+    "release_v790_desc": "与 shared_toolkit 库完全集成，实现代码重用，革命性的剪贴板支持（Ctrl+V），全面的图像分析工具（差异、指标、边缘检测、通道分析）和增强的 UX 定制。",
+    "release_v790_unified": "统一架构与共享工具包：",
+    "release_v790_unified_desc": "与共享组件库完全集成，实现跨项目的代码重用。",
+    "release_v790_clipboard": "剪贴板集成：",
+    "release_v790_clipboard_desc": "直接从剪贴板粘贴图像（Ctrl+V），带有直观的方向选择覆盖层。",
+    "release_v790_analysis": "专业图像分析套件：",
+    "release_v790_analysis_desc": "像素差异高亮、结构相似性映射、边缘检测、通道分析和指标计算（PSNR/SSIM）。",
+    "release_v790_subpixel": "优质放大镜渲染：",
+    "release_v790_subpixel_desc": "亚像素精度控制，即使在不同的分辨率下也能实现流畅、准确的比较。"
   }
 }
