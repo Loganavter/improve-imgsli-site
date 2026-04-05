@@ -1,4 +1,158 @@
 document.addEventListener('DOMContentLoaded', function() {
+    function initAsteroidShadowAnimation() {
+        const asteroidRoot = document.querySelector('.hero-asteroid');
+        const asteroidImg = asteroidRoot ? asteroidRoot.querySelector('.hero-asteroid-svg') : null;
+
+        if (!asteroidRoot || !asteroidImg) {
+            return;
+        }
+
+        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+        let currentStartTop = 20 + (Math.random() * 60);
+
+        const renderFlightPath = () => {
+            const centerOffset = (currentStartTop - 50) / 30;
+            const base = clamp(centerOffset * 0.02, -0.02, 0.02);
+            const pullToCenter = clamp(-centerOffset * 0.18, -0.18, 0.18);
+            const mid = clamp(base + (pullToCenter * 0.6), -0.14, 0.14);
+            const peak = clamp(base + pullToCenter, -0.2, 0.2);
+
+            asteroidRoot.style.setProperty('--asteroid-base-top', `${currentStartTop.toFixed(2)}%`);
+            asteroidRoot.style.setProperty('--asteroid-y-0', `${base.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-10', `${base.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-24', `${base.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-38', `${mid.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-50', `${peak.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-64', `${mid.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-80', `${base.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-92', `${base.toFixed(2)}vh`);
+            asteroidRoot.style.setProperty('--asteroid-y-100', `${base.toFixed(2)}vh`);
+        };
+
+        const pickNextFlightTarget = () => {
+            currentStartTop = 20 + (Math.random() * 60);
+            asteroidRoot.style.setProperty('--asteroid-scale-factor', (1.2 + (Math.random() * 0.2)).toFixed(3));
+            renderFlightPath();
+        };
+
+        pickNextFlightTarget();
+        asteroidRoot.addEventListener('animationiteration', (event) => {
+            if (event.animationName !== 'heroAsteroidFly') {
+                return;
+            }
+            pickNextFlightTarget();
+        });
+
+        fetch(asteroidImg.getAttribute('src'))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load asteroid SVG: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(svgText => {
+                const parsed = new DOMParser().parseFromString(svgText, 'image/svg+xml');
+                const inlineSvg = parsed.querySelector('svg');
+
+                if (!inlineSvg) {
+                    throw new Error('Asteroid SVG has no <svg> root.');
+                }
+
+                inlineSvg.classList.add('hero-asteroid-svg', 'hero-asteroid-svg-inline');
+                inlineSvg.setAttribute('aria-hidden', 'true');
+                asteroidImg.replaceWith(inlineSvg);
+
+                const gradient = inlineSvg.querySelector('#terminator-shadow');
+                const baseLight = inlineSvg.querySelector('#asteroid-base-light');
+                const stops = gradient ? gradient.querySelectorAll('stop') : [];
+                if (!gradient || stops.length < 3 || !baseLight) {
+                    throw new Error('Asteroid gradients are missing or incomplete.');
+                }
+
+                const animatedGradient = gradient.querySelector('animateTransform');
+                if (animatedGradient) {
+                    animatedGradient.remove();
+                }
+
+                const animatedBaseLight = baseLight.querySelector('animateTransform');
+                if (animatedBaseLight) {
+                    animatedBaseLight.remove();
+                }
+
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                const applyShadowState = (phase) => {
+                    const orbit = phase * Math.PI * 2;
+                    const midFlight = Math.sin(phase * Math.PI) ** 2;
+
+                    // Псевдо-3D модель для профильного ракурса:
+                    // астероид как будто слегка рыщет вокруг вертикальной оси
+                    // и чуть кивает, но без полного разворота к камере.
+                    const yaw = Math.sin(orbit);
+                    const pitch = Math.sin(orbit * 2 + 0.6) * 0.45;
+                    const roll = Math.cos(orbit + 0.35) * 0.18;
+
+                    // Базу сдвигаем примерно на -20 градусов по часовой
+                    // относительно предыдущего положения терминатора.
+                    const tiltDeg = 24 + yaw * 10 + pitch * 7 + roll * 5;
+                    const shiftX = 16 + yaw * 9 + roll * 2;
+                    const shiftY = 4 + pitch * 9;
+                    const spanX = 28 + pitch * 3;
+                    const spanY = 47 + yaw * 3;
+
+                    // Edge меняем заметнее: при повороте к зрителю переход шире,
+                    // при уходе в сторону — уже и резче.
+                    const edge = 76 + yaw * 11 + pitch * 6;
+                    const transparentEdge = Math.max(0, edge - (29 + Math.abs(yaw) * 5));
+                    const density = 0.81 + ((pitch + 0.45) / 0.9) * 0.07;
+                    const radians = tiltDeg * (Math.PI / 180);
+                    const cos = Math.cos(radians);
+                    const sin = Math.sin(radians);
+                    const centerX = 50 + shiftX;
+                    const centerY = 50 + shiftY;
+
+                    gradient.setAttribute('x1', `${(centerX - cos * spanX).toFixed(2)}%`);
+                    gradient.setAttribute('y1', `${(centerY - sin * spanY).toFixed(2)}%`);
+                    gradient.setAttribute('x2', `${(centerX + cos * spanX).toFixed(2)}%`);
+                    gradient.setAttribute('y2', `${(centerY + sin * spanY).toFixed(2)}%`);
+
+                    stops[0].setAttribute('offset', `${transparentEdge.toFixed(2)}%`);
+                    stops[1].setAttribute('offset', `${edge.toFixed(2)}%`);
+                    stops[1].setAttribute('stop-opacity', (density * 0.95).toFixed(2));
+                    stops[2].setAttribute('stop-opacity', density.toFixed(2));
+
+                    // В середине пролета свет уходит ближе к центру формы,
+                    // по краям снова сильнее смещается к верхнему левому краю.
+                    const lightCx = 35 + yaw * 2 + (1 - midFlight) * -6 + midFlight * 9;
+                    const lightCy = 35 + pitch * 6 + (1 - midFlight) * -4 + midFlight * 8;
+                    const lightRadius = 65 - midFlight * 6 + Math.abs(yaw) * 2;
+                    baseLight.setAttribute('cx', `${lightCx.toFixed(2)}%`);
+                    baseLight.setAttribute('cy', `${lightCy.toFixed(2)}%`);
+                    baseLight.setAttribute('r', `${lightRadius.toFixed(2)}%`);
+                };
+
+                if (prefersReducedMotion) {
+                    applyShadowState(0);
+                    return;
+                }
+
+                const orbitDurationMs = 8000;
+
+                const animateShadow = (timestamp) => {
+                    const phase = (timestamp % orbitDurationMs) / orbitDurationMs;
+                    applyShadowState(phase);
+                    window.requestAnimationFrame(animateShadow);
+                };
+
+                window.requestAnimationFrame(animateShadow);
+            })
+            .catch(error => {
+                console.warn('Asteroid shadow animation disabled:', error);
+            });
+    }
+
+    initAsteroidShadowAnimation();
 
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -94,6 +248,60 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    const heroImage = document.getElementById('animated-hero-image');
+    if (heroImage && window.matchMedia('(pointer: fine)').matches) {
+        const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+        heroImage.addEventListener('pointermove', (e) => {
+            const rect = heroImage.getBoundingClientRect();
+            const relX = (e.clientX - rect.left) / rect.width;
+            const relY = (e.clientY - rect.top) / rect.height;
+            const centeredX = (relX - 0.5) * 2;
+            const centeredY = (relY - 0.5) * 2;
+
+            const rotateY = clamp(centeredX * 3.5, -3.5, 3.5);
+            const rotateX = clamp(-centeredY * 2.5, -2.5, 2.5);
+            const shadowX = clamp(-centeredX * 18, -18, 18);
+            const shadowY = clamp(-centeredY * 22, -22, 22);
+
+            heroImage.style.setProperty('--hero-rotate-x', `${rotateX}deg`);
+            heroImage.style.setProperty('--hero-rotate-y', `${rotateY}deg`);
+            heroImage.style.setProperty('--hero-shine-x', `${(1 - relX) * 100}%`);
+            heroImage.style.setProperty('--hero-shine-y', `${(1 - relY) * 100}%`);
+            heroImage.style.setProperty('--hero-shadow-x', `${shadowX}px`);
+            heroImage.style.setProperty('--hero-shadow-y', `${shadowY}px`);
+        });
+
+        heroImage.addEventListener('pointerleave', () => {
+            heroImage.style.setProperty('--hero-rotate-x', '0deg');
+            heroImage.style.setProperty('--hero-rotate-y', '0deg');
+            heroImage.style.setProperty('--hero-shine-x', '50%');
+            heroImage.style.setProperty('--hero-shine-y', '50%');
+            heroImage.style.setProperty('--hero-shadow-x', '14px');
+            heroImage.style.setProperty('--hero-shadow-y', '24px');
+        });
+    }
+
+    const screenshotCardsForTilt = Array.from(document.querySelectorAll('.screenshots-grid .screenshot-card'));
+    if (screenshotCardsForTilt.length && Math.floor(Math.random() * 5) === 0) {
+        const randomDeg = () => {
+            const sign = Math.random() < 0.5 ? -1 : 1;
+            const magnitude = 5 + (Math.random() * 10);
+            return sign * magnitude;
+        };
+        const luckyIndex = Math.floor(Math.random() * screenshotCardsForTilt.length);
+        const luckyCard = screenshotCardsForTilt[luckyIndex];
+        const rotateX = randomDeg();
+        const rotateY = randomDeg();
+        const shadowX = (-rotateY * 2.2).toFixed(2);
+        const shadowY = (Math.abs(rotateX) * 1.6 + 10).toFixed(2);
+        luckyCard.classList.add('screenshot-card-featured');
+        luckyCard.style.setProperty('--shot-rotate-x', `${rotateX.toFixed(2)}deg`);
+        luckyCard.style.setProperty('--shot-rotate-y', `${rotateY.toFixed(2)}deg`);
+        luckyCard.style.setProperty('--shot-shadow-x', `${shadowX}px`);
+        luckyCard.style.setProperty('--shot-shadow-y', `${shadowY}px`);
+    }
 
     const copyButtons = document.querySelectorAll('.copy-btn');
     const clipboardIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
@@ -322,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.querySelector('.hero');
 
     if (heroSection) {
-        const numberOfParticles = 40;
+        const numberOfParticles = 60;
 
         for (let i = 0; i < numberOfParticles; i++) {
             const particle = document.createElement('div');
@@ -331,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const size = Math.random() * 6 + 2;
             const top = Math.random() * 100;
             const left = Math.random() * 100;
-            const duration = Math.random() * 10 + 5;
+            const duration = (Math.random() * 10 + 5) / 1.5;
             const delay = Math.random() * 5;
 
             particle.style.cssText = `

@@ -166,8 +166,185 @@ nav .container {
 .nav-toggle { display: none; }
 .overlay { display: none; }
 
-.hero { min-height: calc(100vh - 80px); display: flex; align-items: center; position: relative; padding: 2rem 0; }
-.hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+.hero { min-height: calc(100vh - 80px); display: flex; align-items: center; position: relative; padding: 2rem 0; overflow: hidden; perspective: 1100px; }
+.hero-asteroid {
+    position: absolute;
+    top: var(--asteroid-base-top, 14%);
+    left: -12%;
+    width: 156px;
+    height: 108px;
+    opacity: 0.96;
+    transform: translate3d(0, 0, 0) rotate(-14deg) scale(1);
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+    animation: heroAsteroidFly 8s linear infinite;
+    will-change: transform;
+    --asteroid-scale-factor: 1.3;
+
+    /*  --trail-angle: направление пылевого следа.
+        0deg = след указывает влево (назад при полёте вправо).
+        Положительные значения вращают след по часовой стрелке.
+        Примеры:
+          полёт вправо-горизонтально  → --trail-angle: 0deg
+          полёт вправо-вниз под 30°   → --trail-angle: -30deg
+          полёт строго вниз           → --trail-angle: -90deg
+          полёт вправо-вверх под 20°  → --trail-angle: 20deg
+          полёт влево                 → --trail-angle: 180deg   */
+    --trail-angle: 10deg;
+}
+
+.hero-asteroid-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-asteroid-svg-inline {
+    overflow: visible;
+    transform: translateZ(0);
+}
+
+/* Пылевой конус — основной газопылевой след.
+   Якорь в центре астероида; rotate(--trail-angle) разворачивает весь конус.
+   Ближние тени скрыты под SVG (z-index: 2), видимый след начинается ~40px от центра. */
+.hero-asteroid::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    z-index: 1;
+    transform: rotate(var(--trail-angle, 0deg));
+    box-shadow:
+        -10px 0 10px 18px rgba(190, 198, 220, 0.30),
+        -25px -2px 14px 16px rgba(185, 193, 215, 0.24),
+        -44px 3px 18px 14px rgba(180, 188, 210, 0.19),
+        -68px -3px 22px 12px rgba(175, 183, 205, 0.15),
+        -98px 2px 28px 10px rgba(168, 176, 198, 0.11),
+        -132px -4px 32px 9px rgba(162, 170, 192, 0.08),
+        -170px 4px 36px 7px rgba(156, 164, 186, 0.055),
+        -215px -2px 42px 6px rgba(150, 158, 180, 0.038),
+        -265px 3px 48px 5px rgba(145, 153, 175, 0.025),
+        -320px -1px 54px 4px rgba(140, 148, 170, 0.015);
+    animation: dustConeBreath 3.2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+/* Обломки — частицы, летящие в хвосте.
+   Тот же якорь в центре + rotate(--trail-angle). */
+.hero-asteroid::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    z-index: 1;
+    background: rgba(195, 203, 225, 0.50);
+    transform: rotate(var(--trail-angle, 0deg));
+    box-shadow:
+        -15px -12px 3px 1px rgba(190, 198, 220, 0.45),
+        -32px 16px 2px 1.5px rgba(182, 190, 212, 0.38),
+        -54px -9px 3px 1px rgba(175, 183, 205, 0.30),
+        -80px 12px 2px 2px rgba(168, 176, 198, 0.24),
+        -112px -16px 3px 1px rgba(160, 168, 190, 0.18),
+        -148px 8px 2px 1.5px rgba(155, 163, 185, 0.13),
+        -190px -11px 3px 1px rgba(148, 156, 178, 0.09),
+        -238px 10px 2px 1px rgba(142, 150, 172, 0.06),
+        -290px -7px 3px 1px rgba(136, 144, 166, 0.035);
+    animation: debrisDrift 4.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes heroAsteroidFly {
+    0% {
+        transform: translate3d(0, var(--asteroid-y-0, 0vh), 92px) rotate(-10deg) scale(calc(1.08 * var(--asteroid-scale-factor)));
+        opacity: 0;
+    }
+    8% {
+        opacity: 0.88;
+    }
+    10% {
+        transform: translate3d(10vw, var(--asteroid-y-10, 0vh), 58px) rotate(-9.9deg) scale(calc(1.04 * var(--asteroid-scale-factor)));
+        opacity: 0.9;
+    }
+    24% {
+        transform: translate3d(28vw, var(--asteroid-y-24, 0vh), 10px) rotate(-9.7deg) scale(calc(0.9 * var(--asteroid-scale-factor)));
+        opacity: 0.96;
+    }
+    38% {
+        transform: translate3d(45vw, var(--asteroid-y-38, 0vh), -42px) rotate(-9.5deg) scale(calc(0.76 * var(--asteroid-scale-factor)));
+        opacity: 0.95;
+    }
+    50% {
+        transform: translate3d(58vw, var(--asteroid-y-50, 0vh), -64px) rotate(-9.3deg) scale(calc(0.64 * var(--asteroid-scale-factor)));
+        opacity: 0.93;
+    }
+    64% {
+        transform: translate3d(74vw, var(--asteroid-y-64, 0vh), -40px) rotate(-9.1deg) scale(calc(0.78 * var(--asteroid-scale-factor)));
+        opacity: 0.95;
+    }
+    80% {
+        transform: translate3d(95vw, var(--asteroid-y-80, 0vh), 12px) rotate(-8.8deg) scale(calc(0.92 * var(--asteroid-scale-factor)));
+        opacity: 0.9;
+    }
+    92% {
+        transform: translate3d(112vw, var(--asteroid-y-92, 0vh), 60px) rotate(-8.5deg) scale(calc(1.04 * var(--asteroid-scale-factor)));
+        opacity: 0.42;
+    }
+    100% {
+        transform: translate3d(124vw, var(--asteroid-y-100, 0vh), 92px) rotate(-8.2deg) scale(calc(1.08 * var(--asteroid-scale-factor)));
+        opacity: 0;
+    }
+}
+
+/* Дыхание конуса: scaleY/scaleX пульсируют в ЛОКАЛЬНЫХ осях следа (после rotate).
+   translate дрейфует вдоль/поперёк оси следа, не в экранных координатах. */
+@keyframes dustConeBreath {
+    0%, 100% {
+        transform: rotate(var(--trail-angle, 0deg)) scaleY(1) scaleX(1);
+        opacity: 1;
+    }
+    20% {
+        transform: rotate(var(--trail-angle, 0deg)) scaleY(1.14) scaleX(1.02) translate(-2px, 1px);
+        opacity: 0.74;
+    }
+    45% {
+        transform: rotate(var(--trail-angle, 0deg)) scaleY(0.9) scaleX(0.985) translate(1px, -1px);
+        opacity: 0.9;
+    }
+    70% {
+        transform: rotate(var(--trail-angle, 0deg)) scaleY(1.1) scaleX(1.015) translate(-1.5px, 1.5px);
+        opacity: 0.78;
+    }
+}
+
+/* Дрейф обломков: translate в локальных осях следа + мерцание. */
+@keyframes debrisDrift {
+    0%, 100% {
+        transform: rotate(var(--trail-angle, 0deg)) translate(0, 0);
+        opacity: 0.85;
+    }
+    20% {
+        transform: rotate(var(--trail-angle, 0deg)) translate(-4px, 3px);
+        opacity: 0.5;
+    }
+    45% {
+        transform: rotate(var(--trail-angle, 0deg)) translate(2px, -3px);
+        opacity: 0.75;
+    }
+    70% {
+        transform: rotate(var(--trail-angle, 0deg)) translate(-3px, -2px);
+        opacity: 0.54;
+    }
+}
+
+.hero-content { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr); gap: 2rem; align-items: center; position: relative; z-index: 1; }
 .hero-text h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end), #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 1s ease; }
 .hero-text p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
 .hero-buttons { display: flex; gap: 1rem; animation: fadeInUp 1s ease 0.4s both; }
@@ -199,22 +376,64 @@ nav .container {
 .hero-image {
     position: relative;
     animation: fadeInRight 1s ease 0.6s both;
-
-    transform: translateZ(0);
+    perspective: 1400px;
+    --hero-rotate-x: 0deg;
+    --hero-rotate-y: 0deg;
+    --hero-shine-x: 50%;
+    --hero-shine-y: 50%;
+    --hero-shadow-x: 14px;
+    --hero-shadow-y: 24px;
+    padding: 22px;
+    max-width: 980px;
+    width: 100%;
+    justify-self: end;
+    overflow: visible;
 }
 
-.hero-image img {
+.hero-image-stage {
+    position: relative;
+    isolation: isolate;
+    z-index: 0;
+}
 
+.hero-image-stage::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 52px;
+    background: radial-gradient(circle at var(--hero-shine-x) var(--hero-shine-y), rgba(255,255,255,0.14), rgba(255,255,255,0.04) 10%, transparent 18%);
+    filter: blur(10px);
+    opacity: 0.28;
+    transform: translate(calc(var(--hero-shadow-x) * 0.14), calc(var(--hero-shadow-y) * 0.14)) scale(1);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-image-stage img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: auto;
-
     border-radius: 20px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease;
+    box-shadow:
+        calc(var(--hero-shadow-x) * 0.55) calc(var(--hero-shadow-y) * 0.55) 28px rgba(140, 185, 255, 0.22),
+        var(--hero-shadow-x) var(--hero-shadow-y) 62px rgba(0, 0, 0, 0.62);
+    transform:
+        perspective(1400px)
+        rotateX(var(--hero-rotate-x))
+        rotateY(var(--hero-rotate-y))
+        scale(0.94);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    will-change: transform;
+    display: block;
+    transform-origin: center center;
+    backface-visibility: hidden;
 }
 
-.hero-image:hover img {
-    transform: scale(1.05);
+.hero-image:hover .hero-image-stage img {
+    box-shadow:
+        calc(var(--hero-shadow-x) * 0.65) calc(var(--hero-shadow-y) * 0.65) 34px rgba(156, 201, 255, 0.28),
+        calc(var(--hero-shadow-x) * 1.1) calc(var(--hero-shadow-y) * 1.1) 72px rgba(0, 0, 0, 0.68);
 }
 
 section { padding: 2rem 0; }
@@ -246,6 +465,38 @@ section { padding: 2rem 0; }
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.screenshot-card-featured {
+    position: relative;
+    transform-style: preserve-3d;
+    --shot-rotate-x: 8deg;
+    --shot-rotate-y: -10deg;
+    --shot-shadow-x: 24px;
+    --shot-shadow-y: 18px;
+    transform: perspective(1400px) rotateX(var(--shot-rotate-x)) rotateY(var(--shot-rotate-y)) translateY(-4px);
+    box-shadow:
+        calc(var(--shot-shadow-x) * 0.2) calc(var(--shot-shadow-y) * 0.2) 28px rgba(102, 126, 234, 0.14),
+        var(--shot-shadow-x) var(--shot-shadow-y) 44px rgba(0, 0, 0, 0.28);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+.screenshot-card-featured::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(118deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 18%, transparent 42%),
+        linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.18) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.screenshot-card-featured:hover {
+    transform: perspective(1400px) rotateX(calc(var(--shot-rotate-x) * 1.15)) rotateY(calc(var(--shot-rotate-y) * 1.15)) translateY(-12px) translateZ(14px);
+    box-shadow:
+        calc(var(--shot-shadow-x) * 0.26) calc(var(--shot-shadow-y) * 0.26) 34px rgba(102, 126, 234, 0.18),
+        calc(var(--shot-shadow-x) * 1.12) calc(var(--shot-shadow-y) * 1.12) 56px rgba(0, 0, 0, 0.34);
 }
 
 .features { background: rgba(255, 255, 255, 0.02); }
@@ -778,9 +1029,6 @@ body.menu-open {
     transform: translateY(-2px);
   }
 
-  .hero-image:hover img {
-    transform: scale(1.05);
-  }
   .screenshot-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
@@ -815,6 +1063,22 @@ body.menu-open {
 }
 
 @media (max-width: 992px) {
+
+    .hero-image {
+        --hero-rotate-x: 0deg !important;
+        --hero-rotate-y: 0deg !important;
+        --hero-shadow-x: 14px !important;
+        --hero-shadow-y: 24px !important;
+        padding: 10px;
+    }
+
+    .screenshot-card-featured {
+        transform: perspective(1200px) rotateX(calc(var(--shot-rotate-x) * 0.5)) rotateY(calc(var(--shot-rotate-y) * 0.5));
+    }
+
+    .screenshot-card-featured:hover {
+        transform: perspective(1200px) rotateX(calc(var(--shot-rotate-x) * 0.6)) rotateY(calc(var(--shot-rotate-y) * 0.6)) translateY(-6px);
+    }
 
     .lang-switcher::after {
         display: none;
@@ -866,4 +1130,3 @@ body.menu-open {
 
     transition: opacity 0.3s ease;
 }
-

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="100%" height="100%">
+    <defs>
+        <!-- 2. Базовый объемный свет астероида (свет падает сверху-слева) -->
+        <radialGradient id="asteroid-base-light" cx="35%" cy="35%" r="65%" gradientUnits="objectBoundingBox">
+            <animateTransform
+                attributeName="gradientTransform"
+                type="translate"
+                values="-0.05 -0.04; 0.01 -0.01; 0.07 0.05; 0.02 0.08; -0.05 -0.04"
+                dur="8s"
+                repeatCount="indefinite"/>
+            <stop offset="0%" stop-color="#d4d7db"/>
+            <stop offset="30%" stop-color="#7a7f87"/>
+            <stop offset="60%" stop-color="#2a2c33"/>
+            <stop offset="85%" stop-color="#090a0d"/>
+            <stop offset="100%" stop-color="#000000"/>
+        </radialGradient>
+
+        <!-- 3. Градиент терминатора (жесткая тень на неосвещенной стороне) -->
+        <linearGradient id="terminator-shadow" x1="20%" y1="20%" x2="80%" y2="80%">
+            <animateTransform
+                attributeName="gradientTransform"
+                type="rotate"
+                values="-8 0.5 0.5; -1 0.5 0.5; 6 0.5 0.5; 2 0.5 0.5; -8 0.5 0.5"
+                dur="8s"
+                repeatCount="indefinite"/>
+            <stop offset="40%" stop-color="#000" stop-opacity="0"/>
+            <stop offset="80%" stop-color="#000" stop-opacity="0.95"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="1"/>
+        </linearGradient>
+
+        <!-- 4. Градиент ВНУТРИ кратера (тень со стороны света, отсвет на противоположной стене) -->
+        <linearGradient id="crater-inner" x1="0%" y1="0%" x2="100%" y2="100%">
+            <animateTransform
+                attributeName="gradientTransform"
+                type="rotate"
+                values="-6 0.5 0.5; -2 0.5 0.5; 4 0.5 0.5; 1 0.5 0.5; -6 0.5 0.5"
+                dur="8s"
+                repeatCount="indefinite"/>
+            <stop offset="0%" stop-color="#050508" stop-opacity="0.95"/>
+            <stop offset="50%" stop-color="#222" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#888" stop-opacity="0.3"/>
+        </linearGradient>
+
+        <!-- 5. Градиент КРАЯ (вала) кратера (блик со стороны света, тень на противоположной) -->
+        <linearGradient id="crater-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+            <animateTransform
+                attributeName="gradientTransform"
+                type="rotate"
+                values="-8 0.5 0.5; -3 0.5 0.5; 5 0.5 0.5; 2 0.5 0.5; -8 0.5 0.5"
+                dur="8s"
+                repeatCount="indefinite"/>
+            <stop offset="0%" stop-color="#c9cbd0" stop-opacity="0.32"/>
+            <stop offset="40%" stop-color="#5b5e66" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0.9"/>
+        </linearGradient>
+
+        <!-- 6. ФИЛЬТР РЕАЛИСТИЧНОЙ ТЕКСТУРЫ КАМНЯ -->
+        <filter id="rock-texture" x="170" y="170" width="590" height="590" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse">
+            <!-- Генерируем фрактальный шум (каменистая поверхность) -->
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="6" result="noise"/>
+
+            <!-- Добавляем 3D-рельеф (бамп-маппинг) на основе шума -->
+            <feDiffuseLighting in="noise" lighting-color="#c7ced8" surfaceScale="10" diffuseConstant="0.82" result="bumpMap">
+                <!-- Источник света совпадает с базовым градиентом (сверху-слева) -->
+                <fePointLight x="300" y="300" z="250">
+                    <animate attributeName="x" values="300;345;390;340;300" dur="8s" repeatCount="indefinite"/>
+                    <animate attributeName="y" values="295;315;350;390;295" dur="8s" repeatCount="indefinite"/>
+                    <animate attributeName="z" values="240;270;255;230;240" dur="8s" repeatCount="indefinite"/>
+                </fePointLight>
+            </feDiffuseLighting>
+
+            <!-- Смешиваем рельеф с исходной векторной графикой -->
+            <feComposite operator="in" in="bumpMap" in2="SourceGraphic" result="texturedRock"/>
+            <feBlend mode="multiply" in="texturedRock" in2="SourceGraphic"/>
+        </filter>
+
+        <!-- Базовая форма астероида (сохранена в defs для переиспользования) -->
+        <path id="asteroid-shape" d="M 450 200
+                 C 580 160, 680 250, 720 350
+                 C 780 500, 750 650, 650 720
+                 C 520 800, 400 750, 320 700
+                 C 180 620, 150 480, 200 350
+                 C 250 220, 320 240, 450 200 Z" />
+        <clipPath id="asteroid-clip">
+            <use href="#asteroid-shape"/>
+        </clipPath>
+    </defs>
+
+    <!-- ОСНОВНАЯ ГРУППА АСТЕРОИДА С ПРИМЕНЕННЫМ ФИЛЬТРОМ -->
+    <g filter="url(#rock-texture)" clip-path="url(#asteroid-clip)">
+
+        <!-- Тело астероида -->
+        <use href="#asteroid-shape" fill="url(#asteroid-base-light)"/>
+
+        <!-- КРАТЕРЫ (рисуются поверх тела, фильтр автоматически придаст им текстуру) -->
+
+        <!-- Большой кратер (освещенная сторона) -->
+        <ellipse cx="380" cy="380" rx="90" ry="60" transform="rotate(-25 380 380)"
+                 fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="12"/>
+
+        <!-- Средний кратер (возле экватора) -->
+        <ellipse cx="580" cy="520" rx="60" ry="40" transform="rotate(15 580 520)"
+                 fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="8"/>
+
+        <!-- Малый кратер (в тени, менее выражен) -->
+        <ellipse cx="650" cy="400" rx="35" ry="20" transform="rotate(45 650 400)"
+                 fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="5" opacity="0.7"/>
+
+        <!-- Серия мелких кратеров -->
+        <circle cx="450" cy="280" r="15" fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="3"/>
+        <circle cx="280" cy="520" r="22" fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="4"/>
+        <ellipse cx="500" cy="650" rx="18" ry="12" transform="rotate(-10 500 650)" fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="3"/>
+        <circle cx="320" cy="300" r="10" fill="url(#crater-inner)" stroke="url(#crater-rim)" stroke-width="2"/>
+
+        <!-- ТЕРМИНАТОР: Наложение глубокой тени на правую нижнюю часть -->
+        <use href="#asteroid-shape" fill="url(#terminator-shadow)"/>
+
+    </g>
+
+    <!-- Мелкие обломки, летящие рядом (используют тот же фильтр) -->
+    <g>
+        <path d="M 180 650 Q 200 640 210 660 T 190 680 Z" fill="url(#asteroid-base-light)"/>
+        <path d="M 800 250 Q 820 220 830 240 T 810 270 Z" fill="url(#asteroid-base-light)"/>
+        <circle cx="230" cy="250" r="8" fill="url(#asteroid-base-light)"/>
+    </g>
+</svg>
