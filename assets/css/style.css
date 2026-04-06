@@ -178,7 +178,7 @@ nav .container {
     pointer-events: none;
     z-index: 0;
     overflow: visible;
-    animation: heroAsteroidFly 8s linear infinite;
+    animation: heroAsteroidFly var(--asteroid-flight-duration, 8s) linear 1 both;
     will-change: transform;
     --asteroid-scale-factor: 1.3;
 

@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const pickFlightDuration = () => 4 + (Math.random() * 7);
 
         let currentStartTop = 20 + (Math.random() * 60);
+        let currentFlightDurationMs = 8000;
+        let flightStartTimestamp = 0;
 
         const renderFlightPath = () => {
             const centerOffset = (currentStartTop - 50) / 30;
@@ -31,19 +33,24 @@ document.addEventListener('DOMContentLoaded', function() {
             asteroidRoot.style.setProperty('--asteroid-y-100', `${base.toFixed(2)}vh`);
         };
 
-        const pickNextFlightTarget = () => {
+        const restartFlight = () => {
             currentStartTop = 20 + (Math.random() * 60);
-            asteroidRoot.style.animationDuration = `${pickFlightDuration().toFixed(2)}s`;
+            currentFlightDurationMs = pickFlightDuration() * 1000;
+            flightStartTimestamp = performance.now();
+            asteroidRoot.style.animation = 'none';
             asteroidRoot.style.setProperty('--asteroid-scale-factor', (1.2 + (Math.random() * 0.2)).toFixed(3));
+            asteroidRoot.style.setProperty('--asteroid-flight-duration', `${(currentFlightDurationMs / 1000).toFixed(2)}s`);
             renderFlightPath();
+            void asteroidRoot.offsetWidth;
+            asteroidRoot.style.animation = '';
         };
 
-        pickNextFlightTarget();
-        asteroidRoot.addEventListener('animationiteration', (event) => {
+        restartFlight();
+        asteroidRoot.addEventListener('animationend', (event) => {
             if (event.animationName !== 'heroAsteroidFly') {
                 return;
             }
-            pickNextFlightTarget();
+            restartFlight();
         });
 
         fetch(asteroidImg.getAttribute('src'))
@@ -130,10 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
-                const orbitDurationMs = 8000;
-
                 const animateShadow = (timestamp) => {
-                    const phase = (timestamp % orbitDurationMs) / orbitDurationMs;
+                    const elapsed = Math.max(0, timestamp - flightStartTimestamp);
+                    const phase = currentFlightDurationMs > 0
+                        ? Math.min((elapsed % currentFlightDurationMs) / currentFlightDurationMs, 1)
+                        : 0;
                     applyShadowState(phase);
                     window.requestAnimationFrame(animateShadow);
                 };
