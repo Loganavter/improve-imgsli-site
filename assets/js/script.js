@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+        const pickFlightDuration = () => 4 + (Math.random() * 7);
 
         let currentStartTop = 20 + (Math.random() * 60);
 
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const pickNextFlightTarget = () => {
             currentStartTop = 20 + (Math.random() * 60);
+            asteroidRoot.style.animationDuration = `${pickFlightDuration().toFixed(2)}s`;
             asteroidRoot.style.setProperty('--asteroid-scale-factor', (1.2 + (Math.random() * 0.2)).toFixed(3));
             renderFlightPath();
         };
