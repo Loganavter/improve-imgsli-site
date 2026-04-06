@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
         const pickFlightDuration = () => 4 + (Math.random() * 7);
 
-        let currentStartTop = 20 + (Math.random() * 60);
+        let currentStartTop = 10 + (Math.random() * 80);
         let currentFlightDurationMs = 8000;
         let flightStartTimestamp = 0;
         let restartFrameId = null;
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.cancelAnimationFrame(restartFrameId);
             }
 
-            currentStartTop = 20 + (Math.random() * 60);
+            currentStartTop = 10 + (Math.random() * 80);
             currentFlightDurationMs = pickFlightDuration() * 1000;
             asteroidRoot.style.animation = 'none';
             asteroidRoot.style.opacity = '0';
