@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentStartTop = 20 + (Math.random() * 60);
         let currentFlightDurationMs = 8000;
         let flightStartTimestamp = 0;
+        let restartFrameId = null;
 
         const renderFlightPath = () => {
             const centerOffset = (currentStartTop - 50) / 30;
@@ -34,15 +35,24 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         const restartFlight = () => {
+            if (restartFrameId !== null) {
+                window.cancelAnimationFrame(restartFrameId);
+            }
+
             currentStartTop = 20 + (Math.random() * 60);
             currentFlightDurationMs = pickFlightDuration() * 1000;
-            flightStartTimestamp = performance.now();
             asteroidRoot.style.animation = 'none';
+            asteroidRoot.style.opacity = '0';
             asteroidRoot.style.setProperty('--asteroid-scale-factor', (1.2 + (Math.random() * 0.2)).toFixed(3));
             asteroidRoot.style.setProperty('--asteroid-flight-duration', `${(currentFlightDurationMs / 1000).toFixed(2)}s`);
             renderFlightPath();
             void asteroidRoot.offsetWidth;
-            asteroidRoot.style.animation = '';
+            restartFrameId = window.requestAnimationFrame(() => {
+                flightStartTimestamp = performance.now();
+                asteroidRoot.style.animation = '';
+                asteroidRoot.style.opacity = '';
+                restartFrameId = null;
+            });
         };
 
         restartFlight();
