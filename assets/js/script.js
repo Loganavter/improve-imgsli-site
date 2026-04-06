@@ -86,23 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     const orbit = phase * Math.PI * 2;
                     const midFlight = Math.sin(phase * Math.PI) ** 2;
 
-                    // Псевдо-3D модель для профильного ракурса:
-                    // астероид как будто слегка рыщет вокруг вертикальной оси
-                    // и чуть кивает, но без полного разворота к камере.
                     const yaw = Math.sin(orbit);
                     const pitch = Math.sin(orbit * 2 + 0.6) * 0.45;
                     const roll = Math.cos(orbit + 0.35) * 0.18;
 
-                    // Базу сдвигаем примерно на -20 градусов по часовой
-                    // относительно предыдущего положения терминатора.
                     const tiltDeg = 24 + yaw * 10 + pitch * 7 + roll * 5;
                     const shiftX = 16 + yaw * 9 + roll * 2;
                     const shiftY = 4 + pitch * 9;
                     const spanX = 28 + pitch * 3;
                     const spanY = 47 + yaw * 3;
 
-                    // Edge меняем заметнее: при повороте к зрителю переход шире,
-                    // при уходе в сторону — уже и резче.
                     const edge = 76 + yaw * 11 + pitch * 6;
                     const transparentEdge = Math.max(0, edge - (29 + Math.abs(yaw) * 5));
                     const density = 0.81 + ((pitch + 0.45) / 0.9) * 0.07;
@@ -122,8 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     stops[1].setAttribute('stop-opacity', (density * 0.95).toFixed(2));
                     stops[2].setAttribute('stop-opacity', density.toFixed(2));
 
-                    // В середине пролета свет уходит ближе к центру формы,
-                    // по краям снова сильнее смещается к верхнему левому краю.
                     const lightCx = 35 + yaw * 2 + (1 - midFlight) * -6 + midFlight * 9;
                     const lightCy = 35 + pitch * 6 + (1 - midFlight) * -4 + midFlight * 8;
                     const lightRadius = 65 - midFlight * 6 + Math.abs(yaw) * 2;
