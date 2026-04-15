@@ -80,7 +80,10 @@
                         <p data-i18n="hero_subtitle">An intuitive, open-source tool for detailed visual image comparison — ideal for designers, photographers, upscaling enthusiasts, and researchers.</p>
                         <div class="hero-buttons">
                             <a href="#installation" class="btn btn-primary" data-i18n="hero_btn_download">Download Now</a>
-                            <a href="https://github.com/Loganavter/Improve-ImgSLI" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_github">View on GitHub</a>
+                            <a href="https://github.com/Loganavter/Improve-ImgSLI" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_github">View on GitHub</a>
+                            <a href="https://github.com/Loganavter/Improve-ImgSLI/stargazers" class="hero-stars-badge" target="_blank" rel="noopener noreferrer" aria-label="GitHub stars">
+                                <img src="https://img.shields.io/github/stars/Loganavter/Improve-ImgSLI?style=for-the-badge&logo=github&label=Stars&color=2f81f7" alt="GitHub stars badge">
+                            </a>
                         </div>
                     </div>
                     <div class="hero-image" id="animated-hero-image">
@@ -178,27 +181,27 @@
             <div class="container">
                 <h2 class="section-title" data-i18n="install_get_started">Get Started</h2>
                 <div class="install-grid">
-                    <div class="install-option"><div><span class="install-icon">🪟</span><h3 data-i18n="install_windows_title">Windows</h3><p data-i18n="install_windows_desc">Direct download for the latest installer. Simple and straightforward.</p></div><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v8.2.0/Improve_ImgSLI_Setup_v8.2.0.exe" class="btn btn-primary" style="margin-top: 1.5rem;">
+                    <div class="install-option"><div class="install-content"><span class="install-icon">🪟</span><h3 data-i18n="install_windows_title">Windows</h3><p data-i18n="install_windows_desc">Direct download for the latest installer. Simple and straightforward.</p></div><div class="install-actions"><a href="https://github.com/Loganavter/Improve-ImgSLI/releases/download/v8.2.0/Improve_ImgSLI_Setup_v8.2.0.exe" class="btn btn-primary">
     <span data-i18n="install_windows_download">Download</span>&nbsp;v8.2.0
-</a></div>
-                    <div class="install-option"><div><span class="install-icon">🐧</span><h3 data-i18n="install_linux_title">Linux (Flatpak)</h3><p data-i18n="install_linux_desc">Universal Linux package via Flathub for easy installation across distros.</p><div class="code-block">
+</a></div></div>
+                    <div class="install-option"><div class="install-content"><span class="install-icon">🐧</span><h3 data-i18n="install_linux_title">Linux (Flatpak)</h3><p data-i18n="install_linux_desc">Universal Linux package via Flathub for easy installation across distros.</p><div class="code-block">
     <code>flatpak install io.github.Loganavter.Improve-ImgSLI</code>
     <button class="copy-btn" aria-label="Copy code">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
     </button>
-</div></div></div>
-                    <div class="install-option"><div><span class="install-icon">🏗️</span><h3 data-i18n="install_arch_title">Arch Linux (AUR)</h3><p data-i18n="install_arch_desc">Community-maintained package for Arch Linux users.</p><div class="code-block">
+</div></div><div class="install-actions"><a href="https://flathub.org/apps/details/io.github.Loganavter.Improve-ImgSLI" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="install_open_page">Open Page</a></div></div>
+                    <div class="install-option"><div class="install-content"><span class="install-icon">🏗️</span><h3 data-i18n="install_arch_title">Arch Linux (AUR)</h3><p data-i18n="install_arch_desc">Community-maintained package for Arch Linux users.</p><div class="code-block">
     <code>yay -S improve-imgsli</code>
     <button class="copy-btn" aria-label="Copy code">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
     </button>
-</div></div></div>
-                    <div class="install-option"><div><span class="install-icon">🐍</span><h3 data-i18n="install_python_title">Python (Source)</h3><p data-i18n="install_python_desc">Run directly from source with our powerful launcher script.</p><div class="code-block">
+</div></div><div class="install-actions"><a href="https://aur.archlinux.org/packages/improve-imgsli" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="install_open_page">Open Page</a></div></div>
+                    <div class="install-option"><div class="install-content"><span class="install-icon">🐍</span><h3 data-i18n="install_python_title">Python (Source)</h3><p data-i18n="install_python_desc">Run directly from source with our powerful launcher script.</p><div class="code-block">
     <code>git clone https://github.com/Loganavter/Improve-ImgSLI.git<br>cd Improve-ImgSLI<br>./launcher.sh run</code>
     <button class="copy-btn" aria-label="Copy code">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
     </button>
-</div></div></div>
+</div></div><div class="install-actions"><a href="https://github.com/Loganavter/Improve-ImgSLI" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="install_open_page">Open Page</a></div></div>
                 </div>
             </div>
         </section>

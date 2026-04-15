@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function initAsteroidShadowAnimation() {
         const asteroidRoot = document.querySelector('.hero-asteroid');
         const asteroidImg = asteroidRoot ? asteroidRoot.querySelector('.hero-asteroid-svg') : null;
+        const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
 
-        if (!asteroidRoot || !asteroidImg) {
+        if (!asteroidRoot || !asteroidImg || isMobileViewport) {
             return;
         }
 

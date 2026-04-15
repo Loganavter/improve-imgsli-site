@@ -347,7 +347,10 @@ nav .container {
 .hero-content { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.35fr); gap: 2rem; align-items: center; position: relative; z-index: 1; }
 .hero-text h1 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end), #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeInUp 1s ease; }
 .hero-text p { font-size: 1.25rem; margin-bottom: 2rem; opacity: 0.9; animation: fadeInUp 1s ease 0.2s both; }
-.hero-buttons { display: flex; gap: 1rem; animation: fadeInUp 1s ease 0.4s both; }
+.hero-buttons { display: flex; gap: 1rem; animation: fadeInUp 1s ease 0.4s both; flex-wrap: wrap; align-items: center; }
+.hero-stars-badge { display: inline-flex; align-items: center; line-height: 0; transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 999px; }
+.hero-stars-badge img { display: block; height: 40px; width: auto; }
+.hero-stars-badge:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(47, 129, 247, 0.25); }
 .btn {
     padding: 1rem 2rem;
     border: none;
@@ -364,14 +367,7 @@ nav .container {
     text-align: center;
 }
 .btn-primary { background: linear-gradient(45deg, var(--primary-color-start), var(--primary-color-end)); color: white; }
-.btn-secondary {
-    background: rgba(102, 126, 234, 0.8);
-    backdrop-filter: blur(5px);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
 .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); }
-.btn-secondary:hover { background: rgba(102, 126, 234, 1); }
 
 .hero-image {
     position: relative;
@@ -520,6 +516,9 @@ section { padding: 2rem 0; }
 .install-option:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
 .install-icon { font-size: 4rem; margin-bottom: 1rem; display: block; }
 .install-option h3 { margin-bottom: 1rem; color: var(--primary-color-start); }
+.install-content { display: flex; flex-direction: column; height: 100%; }
+.install-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+.install-actions .btn { width: 100%; }
 
 #releases { background: rgba(0,0,0,0.2); }
 .install-note { background: var(--background-card); border: 1px solid var(--primary-color-start); border-radius: 15px; padding: 2rem; margin-bottom: 3rem; display: flex; align-items: center; gap: 2rem; }
@@ -641,7 +640,9 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     .hero { padding: 1rem 0; }
     .hero-content { grid-template-columns: 1fr; text-align: center; }
     .hero-buttons { justify-content: center; }
+    .hero-stars-badge img { height: 36px; }
     .hero-text h1 { font-size: 2.5rem; }
+    .hero-asteroid { display: none; }
     .screenshots-grid { grid-template-columns: 1fr; }
     section { padding: 1rem 0; }
     .section-title { font-size: 2.5rem; }
@@ -656,6 +657,9 @@ footer { padding: 2rem 0 1rem; background: rgba(0, 0, 0, 0.5); border-top: 1px s
     }
     .install-option {
         padding: 1.5rem;
+    }
+    .install-actions {
+        margin-top: 1.25rem;
     }
 
     .hide-on-mobile {
@@ -1020,9 +1024,6 @@ body.menu-open {
   .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-  }
-  .btn-secondary:hover {
-    background: rgba(102, 126, 234, 1);
   }
   .asset-btn:hover {
     background: var(--primary-color-start);
